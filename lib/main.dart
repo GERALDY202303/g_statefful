@@ -1,41 +1,65 @@
+import 'dart:html';
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(ujian());
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class ujian extends StatefulWidget {
+  @override
+  State<ujian> createState() => ujian_State();
+}
+
+class ujian_State extends State<ujian> {
+  TextEditingController namacontroller = TextEditingController();
+  TextEditingController paswordcontroller = TextEditingController();
+  String pesan = "";
+  void login() {
+    setState(() {
+      namacontroller;
+      paswordcontroller;
+      if (namacontroller.text == "geral") {
+        pesan = ("anda geral");
+      } else if (namacontroller == "aldi") {
+        pesan = ("anda aldi");
+      } else {
+        pesan = ("anda bukan keduanya");
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        // useMaterial3: false,
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Column(
+            children: [
+              TextField(
+                controller: namacontroller,
+                decoration: InputDecoration(
+                  labelText: "username",
+                  hintText: "masukkan nama",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: paswordcontroller,
+                decoration: InputDecoration(
+                  labelText: "password",
+                  hintText: "masukkan password",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(onPressed: () {}, child: Text("login")),
+              Text(pesan),
+            ],
+          ),
         ),
       ),
     );
